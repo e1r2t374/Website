@@ -1,0 +1,38 @@
+html {
+	height: 100vh;
+	width: 100vw;
+	background-color: #5d5b5b;
+}
+#menu{
+	background-color: #ffffff;
+	overflow: hidden;
+	cursor: pointer;
+	/*width:15vw;*/
+}
+#menu-btn{
+	font-family: "Lucida Console", "Courier New",monospace;
+	background-color:#545454;
+	cursor: pointer;
+	text-align: center;
+	width:15vw;
+	color: #c2c2c2;
+	
+}
+#menu-contents button {
+	float: left;
+	text-overflow: ellipsis;
+	text-align: left;
+	position:sticky;
+	font-family: "Lucida Console", "Courier New",monospace;
+	background-color:#3b3b3b;
+	color: #c2c2c2;
+	cursor: pointer;
+	width:fit-content;
+	
+}
+#menu-contents button:hover{
+	opacity: 0.6;
+}
+#menu-btn:hover{
+	opacity: 0.6;
+}
