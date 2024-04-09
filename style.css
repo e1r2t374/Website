@@ -5,7 +5,7 @@ html {
 }
 #menu{
 	top: 0;
-	font-size: 1.5vw;
+	font-size: 2.5vw;
 	position: -webkit-sticky !important; /*Safari*/
 	position: sticky !important; 
 	overflow: hidden;
@@ -16,7 +16,8 @@ html {
 }
 #menu button:hover{opacity: 0.6;}
 #menu-btn{
-	font-size: 1.5vw;
+	overflow: hidden;
+	font-size: 2.5vw;
 	background-color:#545454;
 	display: inherit;
 	font-family: inherit;
@@ -24,8 +25,10 @@ html {
 	cursor: inherit;
 }
 #menu-contents button {
-	font-size: 1.4vw;
+	overflow: hidden;
+	font-size: 2.4vw;
 	float: left;
+	text-align: left;
 	background-color:#3b3b3b;
 	display: inherit;
 	font-family: inherit;
@@ -34,9 +37,9 @@ html {
 }
 @media only screen and (max-width: 600px) {
 	#menu{
-		width: 15vw;
+		width: 25vw;
 		display: block;
 	}
-	#menu-btn{width: 10vw;}
-	#menu-contents button {width: 10vw;}
+	#menu-btn{width: 20vw;}
+	#menu-contents button {width: 20vw;}
 }
