@@ -4,35 +4,39 @@ html {
 	background-color: #5d5b5b;
 }
 #menu{
-	background-color: #ffffff;
+	top: 0;
+	font-size: 1.5vw;
+	position: -webkit-sticky !important; /*Safari*/
+	position: sticky !important; 
 	overflow: hidden;
-	cursor: pointer;
-	/*width:15vw;*/
-}
-#menu-btn{
 	font-family: "Lucida Console", "Courier New",monospace;
-	background-color:#545454;
-	cursor: pointer;
-	text-align: center;
-	width:15vw;
 	color: #c2c2c2;
-	
+	cursor: pointer;
+	display: inline-block;
+}
+#menu button:hover{opacity: 0.6;}
+#menu-btn{
+	font-size: 1.5vw;
+	background-color:#545454;
+	display: inherit;
+	font-family: inherit;
+	color: inherit;
+	cursor: inherit;
 }
 #menu-contents button {
+	font-size: 1.4vw;
 	float: left;
-	text-overflow: ellipsis;
-	text-align: left;
-	position:sticky;
-	font-family: "Lucida Console", "Courier New",monospace;
 	background-color:#3b3b3b;
-	color: #c2c2c2;
-	cursor: pointer;
-	width:fit-content;
-	
+	display: inherit;
+	font-family: inherit;
+	color: inherit;
+	cursor: inherit;
 }
-#menu-contents button:hover{
-	opacity: 0.6;
-}
-#menu-btn:hover{
-	opacity: 0.6;
+@media only screen and (max-width: 600px) {
+	#menu{
+		width: 15vw;
+		display: block;
+	}
+	#menu-btn{width: 10vw;}
+	#menu-contents button {width: 10vw;}
 }
