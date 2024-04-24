@@ -7,16 +7,20 @@
 	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div id="menu">
-		<button id="menu-btn" onclick="toggle_menu()">Menu ></button>
-		<div hidden id="menu-contents">
-			<button onclick="window.location.href = '/';">Home</button>
-			<button onclick="alert('About');">About</button>
-			<button onclick="window.open('http://www.github.com/e1r2t374', '_blank').focus();">Github</button>
-			<button onclick="alert('Blog');">Blog</button>
-			<button onclick="alert('Tutorials');">Tutorials</button>
-			<button onclick="alert('Contact');">Contact</button>
-		</div>
+	<h1>E1r2t374(Milo Thompson)</h1>
+	<div class="nav">
+		<a href="/">Home</a>
+		<a href="/about.html" >About</a>
+		<a href="/contact.html" >Contact</a>
+		<hr></hr>
+	</div>
+	<div class ="terminal">
+		<input
+			placeholder="Enter Command Here";
+			cols="10"
+			rows="6"
+		>
+		</input>
 	</div>
 	<script src="script.js"></script>
 </body>
