@@ -1,40 +1,68 @@
+*{
+	overflow: hidden;
+	font-size: 1.5vw;
+	font-family: "Lucida Console", "Courier New", monospace;
+	color: #DAD9D9;
+}
 html {
 	height: 100vh;
 	width: 100vw;
-	background-color: #5d5b5b;
+	background-color: #57595b;
 }
-*{
-	overflow: hidden;
-	font-family: "Lucida Console", "Courier New",monospace;
-	color: #c2c2c2;
+.nav a{
+	font-size: 1.4vw;
+	text-decoration: none;
 }
-#menu{
-	top: 0;
-	position: -webkit-sticky !important; /*Safari*/
-	position: sticky !important; 
-	cursor: pointer;
+.nav a:hover{color: #027bce;}
+.nav a:before {
+	content: "<";
+	margin-right: 5px;
 	display: inline-block;
+	opacity: 0;
+	-webkit-transform: translateX(10px);
+	-moz-transform: translateX(10px);
+	transform: translateX(10px);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+	-moz-transition: -moz-transform 0.3s, opacity 0.2s;
+	transition: transform 0.3s, opacity 0.2s;
 }
-#menu button:hover{opacity: 0.6;}
-#menu-btn{
-	font-size: 2.0vw;
-	background-color:#545454;
-	display: inherit;
-	cursor: inherit;
+.nav a:after {
+	content: ">";
+	margin-left: 5px;
+	display: inline-block;
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+	-moz-transition: -moz-transform 0.3s, opacity 0.2s;
+	transition: transform 0.3s, opacity 0.2s;
+	-webkit-transform: translateX(-10px);
+	-moz-transform: translateX(-10px);
+	transform: translateX(-10px);
 }
-#menu-contents button {
-	font-size: 1.9vw;
-	float: left;
-	text-align: left;
-	background-color:#3b3b3b;
-	display: inherit;
-	cursor: inherit;
+.nav a:hover:before,.nav a:hover:after {
+	opacity: 1;
+	-webkit-transform: translateX(0px);
+	-moz-transform: translateX(0px);
+	transform: translateX(0px);
 }
-@media only screen and (max-width: 600px) {
-	#menu{
-		width: 25vw;
-		display: block;
-	}
-	#menu-btn{width: 20vw;}
-	#menu-contents button {width: 20vw;}
+.terminal input{
+	border-radius: 10px;
+	font-size: 1vw;
+	overflow: scroll;
+	background-color: #18181D;
+	bottom: 0vh;
+	width: 50%vw;
+	outline: none;
+	text-indent: 0.3vw;
+}
+.terminal input:focus{
+	border-color: #219ebc;
+}
+
+::selection {
+	background-color: #0077b6;
+	color: #DAD9D9;
+}
+::-moz-selection {
+	background-color: #0077b6;
+	color: #DAD9D9;
 }
