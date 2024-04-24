@@ -48,9 +48,12 @@ html {
 	border-radius: 10px;
 	font-size: 1vw;
 	overflow: scroll;
-	background-color: #18181D;
+	border-color: transparent;
+	background-color: #1F1F27;
 	bottom: 0vh;
-	width: 50%vw;
+	resize: none;
+	width: 35vw;
+	text-align: left;
 	outline: none;
 	text-indent: 0.3vw;
 }
@@ -65,4 +68,10 @@ html {
 ::-moz-selection {
 	background-color: #0077b6;
 	color: #DAD9D9;
+}
+.term-window{
+	border-radius: 10px;
+	background-color: #868788;
+	height: fit-content;
+	width: fit-content;
 }
