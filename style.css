@@ -44,20 +44,21 @@ html {
 	-moz-transform: translateX(0px);
 	transform: translateX(0px);
 }
-.terminal input{
-	border-radius: 10px;
-	font-size: 1vw;
+.terminal textarea{
+	position: bottom;
+	resize: none;
+	border-radius: 1vw;
+	font-size: 1.4vw;
 	overflow: scroll;
 	border-color: transparent;
 	background-color: #1F1F27;
 	bottom: 0vh;
-	resize: none;
-	width: 35vw;
+	width: flex;
 	text-align: left;
 	outline: none;
 	text-indent: 0.3vw;
 }
-.terminal input:focus{
+.terminal textarea:focus{
 	border-color: #219ebc;
 }
 
@@ -70,8 +71,14 @@ html {
 	color: #DAD9D9;
 }
 .term-window{
-	border-radius: 10px;
+	cursor: move;
+	border-radius: 1.5vw;
 	background-color: #868788;
 	height: fit-content;
 	width: fit-content;
+	position: absolute;
+}
+
+.nav button{
+	background-color: black;
 }
