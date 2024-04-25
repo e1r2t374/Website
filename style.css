@@ -47,12 +47,11 @@ html {
 .terminal textarea{
 	position: bottom;
 	resize: none;
-	border-radius: 1vw;
+	border-radius: 0.4vw;
 	font-size: 1.4vw;
 	overflow: scroll;
 	border-color: transparent;
 	background-color: #1F1F27;
-	bottom: 0vh;
 	width: flex;
 	text-align: left;
 	outline: none;
@@ -81,4 +80,13 @@ html {
 
 .nav button{
 	background-color: black;
+}
+#output{
+	resize:none;
+	border-left: 2px solid #219ebc;
+	background: #757575;
+	text-align: left;
+	height: fit-content;
+	display: fit-content;
+	overflow: scroll;
 }
