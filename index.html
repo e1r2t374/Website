@@ -13,16 +13,23 @@
 		<a href="/about.html" >About</a>
 		<a href="/contact.html" >Contact</a>
 		<a href="" >Blog</a>
+		<button id="term-toggle" onclick="termToggle()">Show Term</button>
+		<button id="term-rest" onclick="termRest()">Rest Term</button>
 		<hr></hr>
 	</div>
 	
-	<div class="term-window">
+	<div id="term" class="term-window">
 		<h1 style="text-align: center";>Terminal</h1>
-		<p1 style="font-size: 1.4vw";>Try typing</p1>
+		<p1  style="font-size: 1.4vw";>Try typing</p1>
 		<p2 style="font-size: 1.4vw"> "help" </p2>
 		<p3 style="font-size: 1.4vw">for a list of commands!</p3>
+		<br> <br/>
 		<div class ="terminal">
-			<input placeholder='Enter Command Here';></input>
+			<textarea 
+				cols="50";
+				rows="5";
+				placeholder='Enter Command Here';
+			></textarea>
 		</div>
 	</div>
 	
