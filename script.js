@@ -1,4 +1,6 @@
 var term = document.getElementById("term");
+var input = document.getElementById("input");
+var output = document.getElementById("output");
 dragDiv(term);
 function dragDiv(div) {
 	let x1 = 0, y1 = 0, x2 = 0, y2 = 0;
@@ -27,12 +29,12 @@ var toggle=1;
 function termToggle(){
 	if (toggle){
 		toggle=0;
-		document.getElementById("term").style.display = "none";
+		term.style.display = "none";
 		document.getElementById("term-toggle").innerHTML="Show Term";
 	}
 	else{
 		toggle=1;
-		document.getElementById("term").style.display = "block";
+		term.style.display = "block";
 		document.getElementById("term-toggle").innerHTML="Hide Term";
 	}
 }
@@ -42,3 +44,23 @@ function termRest(){
 	term.style.top = "110px";
 	term.style.left = "9px";
 }
+function keypart() {
+	document.addEventListener("keydown", function (event) {
+	if (event.key === 'Enter') {
+		event.preventDefault();
+		switch(input.value){
+			case "help":
+				output.innerText = "help - Shows this message\nclear - Clears the terminal\n";
+				break;
+			case "clear":
+				output.innerText = "";
+				break;
+			default:
+				output.innerText = "Unknown command: " + input.value+"\n";
+				break;
+		}
+		input.value = "";
+	}
+  });
+}
+keypart();
