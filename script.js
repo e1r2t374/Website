@@ -37,11 +37,11 @@ function termToggle() {
     if (toggle) {
 	toggle = 0;
 	term.style.display = "none";
-	document.getElementById("term-toggle").innerHTML = "Show Term";
+	document.getElementById("term-toggle").innerText = "Show Term";
     } else {
 	toggle = 1;
 	term.style.display = "block";
-	document.getElementById("term-toggle").innerHTML = "Hide Term";
+	document.getElementById("term-toggle").innerText = "Hide Term";
     }
 }
 termToggle();
@@ -78,7 +78,7 @@ function keypart() {
 		}
 	    });
 
-	    executeCommands(commands);
+	    exec(commands);
 
 	    /* Clear terminal */
 	    input.value = "";
@@ -86,15 +86,15 @@ function keypart() {
     });
 }
 
-function executeCommands(commands) {
-    output.innerHTML = "";
+function exec(commands) {
+    output.innerText = "";
     commands.forEach(function(command) {
 	switch(command){
 	    case "help":
-		output.innerHTML += "help - Shows this message<br>";
+		output.innerText += "help - Shows this message\n";
 		break;
 	    case "clear":
-		output.innerHTML = "";
+		output.innerText = "";
 		break;
 	    case "console-hide":
 		console.style.display = "none";
@@ -103,7 +103,7 @@ function executeCommands(commands) {
 		console.style.display = "block";
 		break;
 	    default:
-		output.innerHTML += "Unknown command: " + command + "<br>";
+		output.innerText += "Unknown command: " + command + "\n";
 		break;
 	}
     });
