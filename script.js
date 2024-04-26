@@ -87,11 +87,11 @@ function keypart() {
 		}
 	});
 }
-
+/* Execute commands (Currently bugged with mutliple commands) */
 function exec(commands) {
 	output.innerText = "";
+	/* Flag parsing */
 	commands.forEach(function(command) {
-	// Example: color -c blue -h red -b green
 	var flags = {};
 	var currentFlag = null;
 	var parts = command.split(' ');
@@ -104,6 +104,7 @@ function exec(commands) {
 			flags[currentFlag].push(parts[i]);
 		}
 	}
+	/* Command Execution */
 	switch(parts[0]){
 		case "help":
 			output.innerText += "help - Shows this message\n";
