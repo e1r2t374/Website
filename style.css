@@ -81,12 +81,26 @@ html {
 .nav button{
 	background-color: black;
 }
+.console-window{
+	border-radius: 1vw;
+	background: #868788;
+	cursor: move;
+	height: fit-content;
+	width: fit-content;
+	position: absolute;
+}
 #output{
-	resize:none;
 	border-left: 2px solid #219ebc;
-	background: #757575;
-	text-align: left;
+	background-color: #757575;
 	height: fit-content;
 	display: fit-content;
+	position: bottom;
+	resize: none;
+	border-radius: 0.4vw;
+	font-size: 1.4vw;
 	overflow: scroll;
+	border-color: transparent;
+	width: flex;
+	text-align: left;
+	outline: none;
 }
