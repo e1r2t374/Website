@@ -55,6 +55,8 @@ function termRest() {
 	term.style.left = "9px";
 	console.style.top = "110px";
 	console.style.left = "9px";
+	input.innerText = "";
+	output.innerText = "";
 }
 
 /* Check if ENTER key is pressed and execute command in terminal if so */
