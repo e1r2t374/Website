@@ -90,7 +90,7 @@ html {
 	position: absolute;
 }
 #output{
-	border-left: 2px solid #219ebc;
+	border-left: 0.3vw solid #219ebc;
 	background-color: #757575;
 	height: fit-content;
 	display: fit-content;
@@ -99,7 +99,6 @@ html {
 	border-radius: 0.4vw;
 	font-size: 1.4vw;
 	overflow: scroll;
-	border-color: transparent;
 	width: flex;
 	text-align: left;
 	outline: none;
