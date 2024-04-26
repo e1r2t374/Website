@@ -57,6 +57,7 @@ function termRest() {
 	console.style.left = "9px";
 	input.innerText = "";
 	output.innerText = "";
+	commands = [];
 }
 
 /* Check if ENTER key is pressed and execute command in terminal if so */
