@@ -37,11 +37,13 @@ function termToggle() {
 	if (toggle) {
 		toggle = 0;
 		term.style.display = "none";
+		console.style.display = "none";
 		document.getElementById("term-toggle").innerText = "Show Term";
 	} 
 	else {
 		toggle = 1;
 		term.style.display = "block";
+		console.style.display = "block";
 		document.getElementById("term-toggle").innerText = "Hide Term";
 	}
 }
@@ -51,6 +53,8 @@ termToggle();
 function termRest() {
 	term.style.top = "110px";
 	term.style.left = "9px";
+	console.style.top = "110px";
+	console.style.left = "9px";
 }
 
 /* Check if ENTER key is pressed and execute command in terminal if so */
