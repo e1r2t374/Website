@@ -188,6 +188,7 @@ function exec(commands) {
 							case "-cfg":
 							case "-cfc":
 							case "-cbc":
+							/* All Cases above Fallthroughs */
 								output.innerText += "Other Flag executed\n";
 								break;
 							default:
@@ -196,7 +197,7 @@ function exec(commands) {
 						}
 					}
 					else{
-						/* Fix */
+						/* TODO: Fix */
 						if(!(currentFlag.forEach in colorFlags)){
 							output.innerText += currentFlag+" Invalid flag!\n";
 							return;
