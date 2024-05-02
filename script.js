@@ -302,6 +302,7 @@ function exec(commands) {
 					}
 				}
 				break;
+		/*Serves as template command*/
 		case "echo":
 			let echoFlags = ["-e"];
 			output.innerText += flags[echoFlags] + "\n";
