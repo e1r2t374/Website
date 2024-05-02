@@ -164,11 +164,12 @@ function exec(commands) {
 					  "-hlc", "-lhfc", "tbg", "tfg", "tfc", 
 					  "tbc", "cbg", "cfg", "cfc" ,"cbc"]
 				for(let j = 0; j < colorFlags.length; j++){
-					if(colorFlags[j] in flags && currentFlag in colorFlags){
+					if(colorFlags[j] in flags){
 						switch(colorFlags[j]) {
 							case "-bg":
-								if( checkClr(flags[colorFlags[j]])){
+								if(checkClr(flags[colorFlags[j]])){
 									document.body.style.background = flags[colorFlags[j]];
+									output.innerText += "Background color set to "+flags[colorFlags[j]]+"\n";
 								}
 								else{
 									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
@@ -188,18 +189,15 @@ function exec(commands) {
 							case "-cfg":
 							case "-cfc":
 							case "-cbc":
-							/* All Cases above Fallthroughs */
 								output.innerText += "Other Flag executed\n";
 								break;
 							default:
 								output.innerText += "Unexpected Flag Error!\n";
 								break;
 						}
-					}
-					else{
-						/* TODO: Fix */
-						if(!(currentFlag.forEach in colorFlags)){
-							output.innerText += currentFlag+" Invalid flag!\n";
+					}else{
+						if (!(colorFlags.includes(currentFlag))){
+							output.innerText += "Unknown flag: " + currentFlag + "\n";
 							return;
 						}
 					}
