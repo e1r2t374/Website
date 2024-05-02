@@ -11,8 +11,8 @@ TODO
 - Blog page
 - About me page
 - Terminal Linux emulation (with security implementations)
-- Add Calculator app indexed by terminal
 - Method of saving configurations (Color customizations, terminal commands and emulation)
+- Add Calculator app indexed by terminal
 - Add browser app indexed by terminal (Serving as proxy)
 - AI (maybe)
 */
