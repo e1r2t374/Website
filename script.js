@@ -92,19 +92,25 @@ function keypart() {
 }
 /* Execute commands (Currently bugged with mutliple commands) */
 function exec(commands) {
-	output.innerText = "";
 	/* Flag parsing */
 	commands.forEach(function(command) {
-	var flags = {};
-	var currentFlag = null;
-	var parts = command.split(' ');
-	for(var i = 1; i < parts.length; i++){
+	let flags = {};
+	let currentFlag = null;
+	let parts = command.split(' ');
+	//ensures flags do no have another command in them
+	for(let i = 1; i < parts.length; i++){
 		if(parts[i].startsWith('-')){
 			currentFlag = parts[i];
 			flags[currentFlag] = [];
 		}
 		else{
-			flags[currentFlag].push(parts[i]);
+			if (flags[currentFlag] !== undefined){
+				flags[currentFlag].push(parts[i]);
+			}
+			else{
+				output.innerText += "Unknown command: " + command + "\n";
+				return;
+			}
 		}
 	}
 	/* Command Execution */
@@ -126,12 +132,16 @@ function exec(commands) {
 			break;
 		case "color":
 			let colorFlags = ["-c", "-h", "-b"];  
-				for(var j = 0; j < colorFlags.length; j++){
+				for(let j = 0; j < colorFlags.length; j++){
 					if(colorFlags[j] in flags){
 						output.innerText += colorFlags[j] + ": " + flags[colorFlags[j]] + "\n";
 					}
 				}
 				break;
+		case "echo":
+			let echoFlags = ["-e"];
+			output.innerText += flags[echoFlags] + "\n";
+			break;
 		default:
 			output.innerText += "Unknown command: " + command + "\n";
 			break;
