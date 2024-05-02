@@ -136,9 +136,8 @@ function exec(commands) {
 		Main
 			bg - background color
 			fg - foreground color
-			fc - font color
-			bc - button color
-			bfc - button font color
+			bbg - button background color
+			bfg - button foreground color
 			hlc - highlight color
 			lhfc - ling hover font color
 		Terminal
@@ -151,7 +150,6 @@ function exec(commands) {
 			cfg - console foreground color
 			cfc - console font color
 			cbc - console border color
-
 		Other
 			h - help
 			*/
@@ -160,12 +158,17 @@ function exec(commands) {
 				s.color = color;
 				return s.color == color;
 			}
-			let colorFlags = ["-bg", "-fg", "-fc", "-bc", "-bfc", 
-					  "-hlc", "-lhfc", "tbg", "tfg", "tfc", 
-					  "tbc", "cbg", "cfg", "cfc" ,"cbc"]
+			let colorFlags = ["-bg","-fg","-bbg","-bfg",
+					  "-hlc","-lhfc","tbg","tfg","tfc", 
+					  "tbc","cbg","cfg","cfc","cbc","-h"]
 				for(let j = 0; j < colorFlags.length; j++){
 					if(colorFlags[j] in flags){
 						switch(colorFlags[j]) {
+								/* TODO:reorder for efficiency */
+							case "-h":
+								/* PlaceHolder output */
+								output.innerText += "color - Changes the color of the terminal\n";
+								break;
 							case "-bg":
 								if(checkClr(flags[colorFlags[j]])){
 									document.body.style.background = flags[colorFlags[j]];
@@ -176,9 +179,45 @@ function exec(commands) {
 								}
 								break;
 							case "-fg":
-							case "-fc":
-							case "-bc":
-							case "-bfc":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementsByTagName("h1")[0].style.color = flags[colorFlags[j]];
+									//Chrome Safari
+									document.getElementsByTagName("hr")[0].style.borderColor = flags[colorFlags[j]];
+									//IE7+
+									document.getElementsByTagName("hr")[0].style.color = flags[colorFlags[j]];
+									//Firefox and Opera
+									document.getElementsByTagName("hr")[0].style.backgroundColor = flags[colorFlags[j]];
+									for(let i=0;i< document.getElementsByTagName("a").length;i++){
+										document.getElementsByTagName("a")[i].style.color = flags[colorFlags[j]];
+									}
+									output.innerText += "Foreground set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-bbg":
+								if(checkClr(flags[colorFlags[j]])){
+									for(let i=0;i< document.getElementsByTagName("button").length;i++){
+										document.getElementsByTagName("button")[i].style.background = flags[colorFlags[j]];
+									}
+									output.innerText += "Button backgrounds set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-bfg":
+								if(checkClr(flags[colorFlags[j]])){
+									for(let i=0;i< document.getElementsByTagName("button").length;i++){
+										document.getElementsByTagName("button")[i].style.color = flags[colorFlags[j]];
+									}
+									output.innerText += "Button foregrounds set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
 							case "-hlc":
 							case "-lhfc":
 							case "-tbg":
