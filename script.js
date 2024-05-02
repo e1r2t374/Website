@@ -120,6 +120,7 @@ function exec(commands) {
 			output.innerText += "clear - Clears the console\n";
 			output.innerText += "hide - Hides the console\n";
 			output.innerText += "show - Shows the console\n";
+			output.innerText += "color\n";
 			break;
 		case "clear":
 			output.innerText = "";
@@ -131,10 +132,75 @@ function exec(commands) {
 			console.style.display = "block";
 			break;
 		case "color":
-			let colorFlags = ["-c", "-h", "-b"];  
+			/*
+		Main
+			bg - background color
+			fg - foreground color
+			fc - font color
+			bc - button color
+			bfc - button font color
+			hlc - highlight color
+			lhfc - ling hover font color
+		Terminal
+			tbg - terminal background color
+			tfg - terminal foreground color
+			tfc - terminal font color
+			tbc - terminal border color
+
+			cbg - console background color
+			cfg - console foreground color
+			cfc - console font color
+			cbc - console border color
+
+		Other
+			h - help
+			*/
+			function checkClr(color){
+				let s = new Option().style;
+				s.color = color;
+				return s.color == color;
+			}
+			let colorFlags = ["-bg", "-fg", "-fc", "-bc", "-bfc", 
+					  "-hlc", "-lhfc", "tbg", "tfg", "tfc", 
+					  "tbc", "cbg", "cfg", "cfc" ,"cbc"]
 				for(let j = 0; j < colorFlags.length; j++){
-					if(colorFlags[j] in flags){
-						output.innerText += colorFlags[j] + ": " + flags[colorFlags[j]] + "\n";
+					if(colorFlags[j] in flags && currentFlag in colorFlags){
+						switch(colorFlags[j]) {
+							case "-bg":
+								if( checkClr(flags[colorFlags[j]])){
+									document.body.style.background = flags[colorFlags[j]];
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-fg":
+							case "-fc":
+							case "-bc":
+							case "-bfc":
+							case "-hlc":
+							case "-lhfc":
+							case "-tbg":
+							case "-tfg":
+							case "-tfc":
+							case "-tbc":
+							case "-cbg":
+							case "-cfg":
+							case "-cfc":
+							case "-cbc":
+								output.innerText += "Other Flag executed\n";
+								break;
+							default:
+								output.innerText += "Unexpected Flag Error!\n";
+								break;
+						}
+					}
+					else{
+						/* Fix */
+						if(!(currentFlag.forEach in colorFlags)){
+							output.innerText += currentFlag+" Invalid flag!\n";
+							return;
+						}
 					}
 				}
 				break;
