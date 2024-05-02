@@ -4,6 +4,19 @@ var input = document.getElementById("input");
 var output = document.getElementById("output");
 var commands = [];
 
+/*
+TODO
+- Add scroll through command history
+- HTB writeups page
+- Blog page
+- About me page
+- Terminal Linux emulation (with security implementations)
+- Add Calculator app indexed by terminal
+- Method of saving configurations (Color customizations, terminal commands and emulation)
+- Add browser app indexed by terminal (Serving as proxy)
+- AI (maybe)
+*/
+
 /* Makes the terminal draggable */
 function dragDiv(div) {
 	let x1 = 0, y1 = 0, x2 = 0, y2 = 0;
