@@ -136,35 +136,31 @@ function exec(commands) {
 		Main
 			bg - background color
 			fg - foreground color
-			bbg - button background color
-			bfg - button foreground color
-			hlc - highlight color
-			lhfc - ling hover font color
 		Terminal
 			tbg - terminal background color
 			tfg - terminal foreground color
-			tfc - terminal font color
-			tbc - terminal border color
-
+			ifg - input foreground
+			ibg - input background
+		Console
 			cbg - console background color
 			cfg - console foreground color
-			cfc - console font color
 			cbc - console border color
+			obg - output background
+			ofg - output foreground
 		Other
 			h - help
+			bbg - button background color
+			bfg - button foreground color
 			*/
 			function checkClr(color){
 				let s = new Option().style;
 				s.color = color;
 				return s.color == color;
 			}
-			let colorFlags = ["-bg","-fg","-bbg","-bfg",
-					  "-hlc","-lhfc","tbg","tfg","tfc", 
-					  "tbc","cbg","cfg","cfc","cbc","-h"]
+			let colorFlags = ["-h","-bg","-fg","-tbg","-tfg","-cbg","-cfg","-ibg","-ifg","-ofg","-obg","-bbg","-bfg"]
 				for(let j = 0; j < colorFlags.length; j++){
 					if(colorFlags[j] in flags){
 						switch(colorFlags[j]) {
-								/* TODO:reorder for efficiency */
 							case "-h":
 								/* PlaceHolder output */
 								output.innerText += "color - Changes the color of the terminal\n";
@@ -196,6 +192,81 @@ function exec(commands) {
 									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
 								}
 								break;
+							case "-tbg":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementById("term").style.background = flags[colorFlags[j]];
+									output.innerText += "Terminal background set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-tfg":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementsByTagName("h1")[1].style.color = flags[colorFlags[j]];
+									document.getElementsByTagName("p1")[0].style.color = flags[colorFlags[j]];
+									document.getElementsByTagName("p2")[0].style.color = flags[colorFlags[j]];
+									document.getElementsByTagName("p3")[0].style.color = flags[colorFlags[j]];
+									output.innerText += "Terminal foreground set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-cbg":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementById("console").style.background = flags[colorFlags[j]];
+									output.innerText += "Console background set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-cfg":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementsByTagName("h1")[2].style.color = flags[colorFlags[j]];
+									output.innerText += "Console foreground set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-ibg":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementsByTagName("textarea")[0].style.background = flags[colorFlags[j]];
+									output.innerText += "Terminal background set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-ifg":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementsByTagName("textarea")[0].style.color = flags[colorFlags[j]];
+									output.innerText += "Terminal foreground set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-obg":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementById("output").style.background = flags[colorFlags[j]];
+									output.innerText += "Console output background set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
+							case "-ofg":
+								if(checkClr(flags[colorFlags[j]])){
+									document.getElementById("output").style.color = flags[colorFlags[j]];
+									output.innerText += "Console output foreground set to "+flags[colorFlags[j]]+"\n";
+								}
+								else{
+									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+								}
+								break;
 							case "-bbg":
 								if(checkClr(flags[colorFlags[j]])){
 									for(let i=0;i< document.getElementsByTagName("button").length;i++){
@@ -218,23 +289,12 @@ function exec(commands) {
 									output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
 								}
 								break;
-							case "-hlc":
-							case "-lhfc":
-							case "-tbg":
-							case "-tfg":
-							case "-tfc":
-							case "-tbc":
-							case "-cbg":
-							case "-cfg":
-							case "-cfc":
-							case "-cbc":
-								output.innerText += "Other Flag executed\n";
-								break;
 							default:
 								output.innerText += "Unexpected Flag Error!\n";
 								break;
 						}
-					}else{
+					}
+					else{
 						if (!(colorFlags.includes(currentFlag))){
 							output.innerText += "Unknown flag: " + currentFlag + "\n";
 							return;
