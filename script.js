@@ -3,6 +3,7 @@ var console = document.getElementById("console");
 var input = document.getElementById("input");
 var output = document.getElementById("output");
 var commands = [];
+var histlog = [];
 /*
 TODO
 - Parse no arguments as -h
@@ -87,45 +88,55 @@ function keypart() {
 					"`": '&#96;'
 				}[match]
 				}).trim();
-			var inputCmds = input.value.split(';');
-			inputCmds.forEach(function(command) {
-				if (command.trim() !== "") {
-					commands.push(command.trim());
+			if (input.value !== '') {
+				let inputCmds = input.value;
+				inputCmds.split(';').forEach(function(command) {
+					if (command.trim() !== '') {
+						commands.push(command.trim());
+					}
+				});
+				if (inputCmds.trim() !== '') {
+					histlog.push(inputCmds.trim());
 				}
-			});
+			}
 			exec(commands);
 			/* Clear terminal */
 			input.value = "";
-			commandIndex = commands.length;
+			histIndex = histlog.length;
 			previousCommand = '';
-		} 
+		}
 		else if (event.key === 'ArrowUp') {
 			event.preventDefault();
-			if (commandIndex > 0) {
-				commandIndex--;
-				input.value = commands[commandIndex];
-			}
-		} 
-		else if (event.key === 'ArrowDown') {
-			event.preventDefault();
-			if (commandIndex < commands.length - 1) {
-				commandIndex++;
-				input.value = commands[commandIndex];
+			if (histIndex > 0) {
+				histIndex--;
+				if (histlog[histIndex] !== undefined) {
+					input.value = histlog[histIndex];
+				}
 			} 
 			else {
-				/* Restore the current input value if at the end of history */
-				if (commandIndex === commands.length - 1) {
-					input.value = previousCommand;
+				input.value = histlog[histlog.length - 1];
+				histIndex = histlog.length - 1;
+			}
+		}
+		else if (event.key === 'ArrowDown') {
+			event.preventDefault();
+			if (histIndex < histlog.length - 1) {
+				histIndex++;
+				if (histlog[histIndex] !== undefined) {
+					input.value = histlog[histIndex];
 				}
 			}
-		} 
+			else {
+				input.value = histlog[0];
+				histIndex = 0;
+			}
+		}
 		else {
 			previousCommand = input.value;
 		}
 	});
 }
 keypart();
-/* Execute commands */
 function exec(commands) {
 	/* Flag parsing */
 	commands.forEach(function(command) {
