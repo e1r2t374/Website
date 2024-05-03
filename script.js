@@ -6,12 +6,13 @@ var commands = [];
 var histlog = [];
 /*
 TODO
+- history command that prints history
 - Parse no arguments as -h
-- Math
+- Emulated file system
+- Special characters like "/ ~ . and .."
 - HTB writeups page
 - Blog page
 - About me page
-- Terminal Linux emulation
 - Method of saving configurations
 - Web proxying
 - AI (maybe)
