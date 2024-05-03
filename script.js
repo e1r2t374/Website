@@ -95,13 +95,11 @@ function keypart() {
 			exec(commands);
 			/* Clear terminal */
 			input.value = "";
-			// Reset commandIndex and store the command for history
 			commandIndex = commands.length;
 			previousCommand = '';
 		} 
 		else if (event.key === 'ArrowUp') {
 			event.preventDefault();
-			// Scroll up through command history
 			if (commandIndex > 0) {
 				commandIndex--;
 				input.value = commands[commandIndex];
@@ -109,20 +107,18 @@ function keypart() {
 		} 
 		else if (event.key === 'ArrowDown') {
 			event.preventDefault();
-			// Scroll down through command history
 			if (commandIndex < commands.length - 1) {
 				commandIndex++;
 				input.value = commands[commandIndex];
 			} 
 			else {
-				// Restore the current input value if at the end of history
+				/* Restore the current input value if at the end of history */
 				if (commandIndex === commands.length - 1) {
 					input.value = previousCommand;
 				}
 			}
 		} 
 		else {
-			// Store the current input value for restoring later
 			previousCommand = input.value;
 		}
 	});
@@ -169,26 +165,6 @@ function exec(commands) {
 			console.style.display = "block";
 			break;
 		case "color":
-			/*
-		Main
-			bg - background color
-			fg - foreground color
-		Terminal
-			tbg - terminal background color
-			tfg - terminal foreground color
-			ifg - input foreground
-			ibg - input background
-		Console
-			cbg - console background color
-			cfg - console foreground color
-			cbc - console border color
-			obg - output background
-			ofg - output foreground
-		Other
-			h - help
-			bbg - button background color
-			bfg - button foreground color
-			*/
 			function checkClr(color){
 				let s = new Option().style;
 				s.color = color;
@@ -199,8 +175,9 @@ function exec(commands) {
 					if(colorFlags[j] in flags){
 						switch(colorFlags[j]) {
 							case "-h":
-								/* PlaceHolder output */
-								output.innerText += "color - Changes the color of the terminal\n";
+								output.innerText += "color - Changes the color of schemes of the website\n";
+								output.innerText +="Usage: color [-bg <background_color>] [-fg <foreground_color>] [...]\n";
+								output.innerText += "Flags:\n-h - Shows this message\n[Main]:\n-bg <background_color> - Changes the background color of the website\n-fg <foreground_color> - Changes the foreground color of the website\n-bbg <button_background_color> - Changes the background color of the buttons\n-bfg <button_foreground_color> - Changes the foreground color of the buttons\n[Terminal]:\n-tbg <terminal_background_color> - Changes the background color of the terminal\n-tfg <terminal_foreground_color> - Changes the foreground color of the terminal\n-ibg <input_background_color> - Changes the background color of the input\n-ifg <input_foreground_color> - Changes the foreground color of the input\n[Console]:\n-cbg <console_background_color> - Changes the background color of the console\n-cfg <console_foreground_color> - Changes the foreground color of the console\n-ofg <output_foreground_color> - Changes the foreground color of the output\n-obg <output_background_color> - Changes the background color of the output\n";
 								break;
 							case "-bg":
 								if(checkClr(flags[colorFlags[j]])){
