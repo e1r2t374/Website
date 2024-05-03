@@ -5,6 +5,7 @@ var output = document.getElementById("output");
 var commands = [];
 /*
 TODO
+- Parse no arguments as -h
 - Math
 - HTB writeups page
 - Blog page
@@ -149,7 +150,7 @@ function exec(commands) {
 	/* Command Execution */
 	switch(parts[0]){
 		case "help":
-			output.innerText += "(Try typing <command> -h for more details)\n\nhelp - Shows this message\nclear - Clears the console\nhide - Hides the console\nshow - Shows the console\ncolor - Changes the color of schemes of the website\n";
+			output.innerText += "(Try typing <command> -h for more details)\n\nhelp - Shows this message\nclear - Clears the console\nhide - Hides the console\nshow - Shows the console\ncolor - Changes the color of schemes of the website\necho - Display a line of text\n";
 			break;
 		case "clear":
 			output.innerText = "";
@@ -171,7 +172,7 @@ function exec(commands) {
 					if(colorFlags[j] in flags){
 						switch(colorFlags[j]) {
 							case "-h":
-								output.innerText += "color - Changes the color of schemes of the website\nUsage: color [-bg <background_color>] [-fg <foreground_color>] [...]\nFlags:\n-h - Shows this message\n[Main]:\n-bg <background_color> - Changes the background color of the website\n-fg <foreground_color> - Changes the foreground color of the website\n-bbg <button_background_color> - Changes the background color of the buttons\n-bfg <button_foreground_color> - Changes the foreground color of the buttons\n[Terminal]:\n-tbg <terminal_background_color> - Changes the background color of the terminal\n-tfg <terminal_foreground_color> - Changes the foreground color of the terminal\n-ibg <input_background_color> - Changes the background color of the input\n-ifg <input_foreground_color> - Changes the foreground color of the input\n[Console]:\n-cbg <console_background_color> - Changes the background color of the console\n-cfg <console_foreground_color> - Changes the foreground color of the console\n-ofg <output_foreground_color> - Changes the foreground color of the output\n-obg <output_background_color> - Changes the background color of the output\n";
+								output.innerText += "color - Changes the color of schemes of the website\nUsage: color [-bg <background_color>] [-fg <foreground_color>] [...]\nOptions:\n-h - Displays this message\n[Main]:\n-bg <background_color> - Changes the background color of the website\n-fg <foreground_color> - Changes the foreground color of the website\n-bbg <button_background_color> - Changes the background color of the buttons\n-bfg <button_foreground_color> - Changes the foreground color of the buttons\n[Terminal]:\n-tbg <terminal_background_color> - Changes the background color of the terminal\n-tfg <terminal_foreground_color> - Changes the foreground color of the terminal\n-ibg <input_background_color> - Changes the background color of the input\n-ifg <input_foreground_color> - Changes the foreground color of the input\n[Console]:\n-cbg <console_background_color> - Changes the background color of the console\n-cfg <console_foreground_color> - Changes the foreground color of the console\n-ofg <output_foreground_color> - Changes the foreground color of the output\n-obg <output_background_color> - Changes the background color of the output\n";
 								break;
 							case "-bg":
 								if(checkClr(flags[colorFlags[j]])){
@@ -310,10 +311,20 @@ function exec(commands) {
 					}
 				}
 				break;
-		case "echo":
-			let echoFlags = ["-e"];
-			output.innerText += flags[echoFlags] + "\n";
-			break;
+			case "echo":
+				if (flags["-h"]) {
+					output.innerText += "echo - Display a line of text\nUsage: echo [-e <text>] [...]\nOptions:\n-h Displays this message\n-e <text> - Enable interpretation of backslash escapes\n-n <text> - Do not output the trailing newline\n";
+			    	}
+				else if (flags["-n"]) {
+					output.innerText += flags["-n"].join(' ');
+			    	} 
+				else if (flags["-e"]) {
+					output.innerText += flags["-e"].join(' ') + "\n";
+			    	} 
+			    	else{
+					output.innerText += "Unknown flag: " + currentFlag + "\n";
+				}
+			    break;
 		default:
 			output.innerText += "Unknown command: " + command + "\n";
 			break;
