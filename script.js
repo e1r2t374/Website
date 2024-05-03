@@ -3,20 +3,17 @@ var console = document.getElementById("console");
 var input = document.getElementById("input");
 var output = document.getElementById("output");
 var commands = [];
-
 /*
 TODO
-- Add scroll through command history
+- Math
 - HTB writeups page
 - Blog page
 - About me page
-- Terminal Linux emulation (with security implementations)
-- Method of saving configurations (Color customizations, terminal commands and emulation)
-- Add Calculator app indexed by terminal
-- Add browser app indexed by terminal (Serving as proxy)
+- Terminal Linux emulation
+- Method of saving configurations
+- Web proxying
 - AI (maybe)
 */
-
 /* Makes the terminal draggable */
 function dragDiv(div) {
 	let x1 = 0, y1 = 0, x2 = 0, y2 = 0;
@@ -72,8 +69,6 @@ function termRest() {
 	output.innerText = "";
 	commands = [];
 }
-
-/* Check if ENTER key is pressed and execute command in terminal if so */
 function keypart() {
 	document.addEventListener("keydown", function (event) {
 		if (event.key === 'Enter') {
@@ -100,17 +95,46 @@ function keypart() {
 			exec(commands);
 			/* Clear terminal */
 			input.value = "";
+			// Reset commandIndex and store the command for history
+			commandIndex = commands.length;
+			previousCommand = '';
+		} 
+		else if (event.key === 'ArrowUp') {
+			event.preventDefault();
+			// Scroll up through command history
+			if (commandIndex > 0) {
+				commandIndex--;
+				input.value = commands[commandIndex];
+			}
+		} 
+		else if (event.key === 'ArrowDown') {
+			event.preventDefault();
+			// Scroll down through command history
+			if (commandIndex < commands.length - 1) {
+				commandIndex++;
+				input.value = commands[commandIndex];
+			} 
+			else {
+				// Restore the current input value if at the end of history
+				if (commandIndex === commands.length - 1) {
+					input.value = previousCommand;
+				}
+			}
+		} 
+		else {
+			// Store the current input value for restoring later
+			previousCommand = input.value;
 		}
 	});
 }
-/* Execute commands (Currently bugged with mutliple commands) */
+keypart();
+/* Execute commands */
 function exec(commands) {
 	/* Flag parsing */
 	commands.forEach(function(command) {
 	let flags = {};
 	let currentFlag = null;
 	let parts = command.split(' ');
-	//ensures flags do no have another command in them
 	for(let i = 1; i < parts.length; i++){
 		if(parts[i].startsWith('-')){
 			currentFlag = parts[i];
@@ -315,7 +339,6 @@ function exec(commands) {
 					}
 				}
 				break;
-		/*Serves as template command*/
 		case "echo":
 			let echoFlags = ["-e"];
 			output.innerText += flags[echoFlags] + "\n";
@@ -326,4 +349,3 @@ function exec(commands) {
 		}
 	});
 }
-keypart();
