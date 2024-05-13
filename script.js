@@ -176,7 +176,7 @@ function exec(commands) {
             console.style.display = "block";
             break;
         case "history":
-            /*let histFlags = ["-h","-c"];*/
+           /*let histFlags = ["-h","-c"];*/
             output.innerText += "History:\n\n";
             for(let i = 0; i < histlog.length; i++){
                 output.innerText += histlog[i]+"\n";
@@ -198,6 +198,7 @@ function exec(commands) {
                             case "-bg":
                                 if(checkClr(flags[colorFlags[f]])){
                                     document.body.style.background = flags[colorFlags[f]];
+                                    document.getElementsByTagName("footer")[0].style.background = flags[colorFlags[f]];
                                     output.innerText += "Background color set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
