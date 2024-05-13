@@ -1,108 +1,149 @@
 *{
-	overflow: hidden;
-	font-size: 1.5vw;
-	font-family: "Lucida Console", "Courier New", monospace;
-	color: #DAD9D9;
+    overflow: hidden;
+    font-size: 1.5vw;
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: #DAD9D9;
 }
 body {
-	height: 100vh;
-	width: 100vw;
-	background-color: #57595b;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
 }
-.nav a{
-	font-size: 1.4vw;
-	text-decoration: none;
+
+header {
+    background-color: black;
+    color: white;
+    padding: 10px;
 }
-.nav a:hover{color: #027bce;}
-.nav a:before {
-	content: "<";
-	margin-right: 5px;
-	display: inline-block;
-	opacity: 0;
-	-webkit-transform: translateX(10px);
-	-moz-transform: translateX(10px);
-	transform: translateX(10px);
-	-webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
-	-moz-transition: -moz-transform 0.3s, opacity 0.2s;
-	transition: transform 0.3s, opacity 0.2s;
+
+section {
+    padding: 20px;
 }
-.nav a:after {
-	content: ">";
-	margin-left: 5px;
-	display: inline-block;
-	opacity: 0;
-	-webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
-	-moz-transition: -moz-transform 0.3s, opacity 0.2s;
-	transition: transform 0.3s, opacity 0.2s;
-	-webkit-transform: translateX(-10px);
-	-moz-transform: translateX(-10px);
-	transform: translateX(-10px);
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
-.nav a:hover:before,.nav a:hover:after {
-	opacity: 1;
-	-webkit-transform: translateX(0px);
-	-moz-transform: translateX(0px);
-	transform: translateX(0px);
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
 }
-.nav button{
-	background-color: black;
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
 }
-.terminal textarea{
-	resize: none;
-	border-radius: 0.4vw;
-	font-size: 1.4vw;
-	overflow: scroll;
-	border-color: transparent;
-	background-color: #1F1F27;
-	width: flex;
-	text-align: left;
-	outline: none;
-	text-indent: 0.3vw;
+nav a:hover{color: #027bce;}
+nav a:before {
+    content: "<";
+    margin-right: 5px;
+    display: inline-block;
+    opacity: 0;
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    transform: translateX(10px);
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+    transition: transform 0.3s, opacity 0.2s;
 }
-.terminal textarea:focus{
-	border-color: #219ebc;
+nav a:before {
+    content: "<";
+    margin-right: 5px;
+    display: inline-block;
+    opacity: 0;
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    transform: translateX(10px);
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+    transition: transform 0.3s, opacity 0.2s;
+}
+nav a:after {
+    content: ">";
+    margin-left: 5px;
+    display: inline-block;
+    opacity: 0;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+    transition: transform 0.3s, opacity 0.2s;
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    transform: translateX(-10px);
+}
+nav a:hover:before,.nav a:hover:after {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    transform: translateX(0px);
+}
+button{
+    background-color: black;
+}
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+#terminal textarea{
+    resize: none;
+    border-radius: 0.4vw;
+    font-size: 1.4vw;
+    overflow: scroll;
+    border-color: transparent;
+    background-color: #1F1F27;
+    width: flex;
+    text-align: left;
+    outline: none;
+    text-indent: 0.3vw;
+}
+#terminal textarea:focus{
+    border-color: #219ebc;
 }
 ::selection, ::-moz-selection  {
-	background-color: #0077b6;
-	color: #DAD9D9;
+    background-color: #0077b6;
+    color: #DAD9D9;
 }
-.term-window{
-	cursor: move;
-	border-radius: 1.5vw;
-	font-size: 0;/* Clear div whitespace*/
-	background-color: #868788;
-	height: fit-content;
-	width: fit-content;
-	position: absolute;
+.term h1{
+    text-align: center;
+    position: bottom;
 }
-.term-window h1{
-	text-align: center;
-	position: bottom;
+.term p{
+    text-align: center;
+    font-size: 1.4vw;
+    position: bottom;
 }
-.term-window p{
-	text-align: center;
-	font-size: 1.4vw;
-	position: bottom;
+#term-window{
+    cursor: move;
+    border-radius: 1.5vw;
+    font-size: 0;/* Clear div whitespace*/
+    background-color: #868788;
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
 }
-.console-window{
-	border-radius: 1vw;
-	background: #868788;
-	cursor: move;
-	height: fit-content;
-	width: fit-content;
-	position: absolute;
+#console-window{
+    border-radius: 1vw;
+    background: #868788;
+    cursor: move;
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
 }
 #output{
-	border-left: 0.3vw solid #219ebc;
-	background-color: #757575;
-	height: fit-content;
-	display: fit-content;
-	position: bottom;
-	resize: none;
-	border-radius: 0.4vw;
-	font-size: 1.4vw;
-	overflow: scroll;
-	width: flex;
-	text-align: left;
-	outline: none;
+    border-left: 0.3vw solid #219ebc;
+    background-color: #757575;
+    height: fit-content;
+    display: fit-content;
+    position: bottom;
+    resize: none;
+    border-radius: 0.4vw;
+    font-size: 1.4vw;
+    overflow: scroll;
+    width: flex;
+    text-align: left;
+    outline: none;
 }
