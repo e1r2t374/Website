@@ -6,7 +6,6 @@ var commands = [];
 var histlog = [];
 /*
 TODO
--Fix all color -fg commands
 -Error handling for empty history scrolling
 - history command that prints history
 - Parse no arguments as -h
@@ -224,6 +223,9 @@ function exec(commands) {
                                 break;
                             case "-tfg":
                                 if(checkClr(flags[colorFlags[j]])){
+                                    for(let i = 0; i < document.getElementsByClassName("term").length;i++){
+                                        document.getElementsByClassName("term")[i].style.color = flags[colorFlags[j]];
+                                    }
                                     output.innerText += "Terminal foreground set to "+flags[colorFlags[j]]+"\n";
                                 }
                                 else{
@@ -241,6 +243,7 @@ function exec(commands) {
                                 break;
                             case "-cfg":
                                 if(checkClr(flags[colorFlags[j]])){
+                                    document.getElementsByClassName("console")[0].style.color = flags[colorFlags[j]];
                                     output.innerText += "Console foreground set to "+flags[colorFlags[j]]+"\n";
                                 }
                                 else{
@@ -258,6 +261,7 @@ function exec(commands) {
                                 break;
                             case "-ifg":
                                 if(checkClr(flags[colorFlags[j]])){
+                                    document.getElementById("input").style.color = flags[colorFlags[j]];
                                     output.innerText += "Terminal foreground set to "+flags[colorFlags[j]]+"\n";
                                 }
                                 else{
