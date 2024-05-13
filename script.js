@@ -4,9 +4,9 @@ var input = document.getElementById("input");
 var output = document.getElementById("output");
 var commands = [];
 var histlog = [];
+var histIndex;
 /*
 TODO
--Error handling for empty history scrolling
 - history command that prints history
 - Parse no arguments as -h
 - Emulated file system
@@ -107,7 +107,7 @@ function keypart() {
             histIndex = histlog.length;
             previousCommand = '';
         }
-        else if (event.key === 'ArrowUp' && histIndex != 0) {
+        else if (event.key === 'ArrowUp' && histIndex !== undefined) {
             event.preventDefault();
             if (histIndex > 0) {
                 histIndex--;
@@ -120,7 +120,7 @@ function keypart() {
                 histIndex = histlog.length - 1;
             }
         }
-        else if (event.key === 'ArrowDown') {
+        else if (event.key === 'ArrowDown' && histIndex !== undefined) {
             event.preventDefault();
             if (histIndex < histlog.length - 1) {
                 histIndex++;
