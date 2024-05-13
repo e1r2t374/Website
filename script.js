@@ -7,7 +7,8 @@ var histlog = [];
 var histIndex;
 /*
 TODO
-- history command that prints history
+- history help and clear flag functionality
+- Add heading background color command
 - Parse no arguments as -h
 - Emulated file system
 - Special characters like "/ ~ . and .."
@@ -174,6 +175,13 @@ function exec(commands) {
         case "show":
             console.style.display = "block";
             break;
+        case "history":
+            /*let histFlags = ["-h","-c"];*/
+            output.innerText += "History:\n\n";
+            for(let i = 0; i < histlog.length; i++){
+                output.innerText += histlog[i]+"\n";
+            }
+            break;
         case "color":
             function checkClr(color){
                 let s = new Option().style;
@@ -181,131 +189,131 @@ function exec(commands) {
                 return s.color == color;
             }
             let colorFlags = ["-h","-bg","-fg","-tbg","-tfg","-cbg","-cfg","-ibg","-ifg","-ofg","-obg","-bbg","-bfg"]
-                for(let j = 0; j < colorFlags.length; j++){
-                    if(colorFlags[j] in flags){
-                        switch(colorFlags[j]) {
+                for(let f = 0; f < colorFlags.length; f++){
+                    if(colorFlags[f] in flags){
+                        switch(colorFlags[f]) {
                             case "-h":
                                 output.innerText += "color - Changes the color of schemes of the website\nUsage: color [-bg <background_color>] [-fg <foreground_color>] [...]\nOptions:\n-h - Displays this message\n[Main]:\n-bg <background_color> - Changes the background color of the website\n-fg <foreground_color> - Changes the foreground color of the website\n-bbg <button_background_color> - Changes the background color of the buttons\n-bfg <button_foreground_color> - Changes the foreground color of the buttons\n[Terminal]:\n-tbg <terminal_background_color> - Changes the background color of the terminal\n-tfg <terminal_foreground_color> - Changes the foreground color of the terminal\n-ibg <input_background_color> - Changes the background color of the input\n-ifg <input_foreground_color> - Changes the foreground color of the input\n[Console]:\n-cbg <console_background_color> - Changes the background color of the console\n-cfg <console_foreground_color> - Changes the foreground color of the console\n-ofg <output_foreground_color> - Changes the foreground color of the output\n-obg <output_background_color> - Changes the background color of the output\n";
                                 break;
                             case "-bg":
-                                if(checkClr(flags[colorFlags[j]])){
-                                    document.body.style.background = flags[colorFlags[j]];
-                                    output.innerText += "Background color set to "+flags[colorFlags[j]]+"\n";
+                                if(checkClr(flags[colorFlags[f]])){
+                                    document.body.style.background = flags[colorFlags[f]];
+                                    output.innerText += "Background color set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-fg":
-                                if(checkClr(flags[colorFlags[j]])){
+                                if(checkClr(flags[colorFlags[f]])){
                                     for(let i = 0; i < document.getElementsByTagName("header")[0].querySelectorAll("a").length;i++){
-                                         document.getElementsByTagName("header")[0].querySelectorAll("a")[i].style.color = flags[colorFlags[j]];
+                                         document.getElementsByTagName("header")[0].querySelectorAll("a")[i].style.color = flags[colorFlags[f]];
                                     }
                                     for(let x = 0; x < document.getElementsByTagName("section").length;x++){
                                         for(let y = 0; y < document.getElementsByTagName("section")[x].querySelectorAll("p, h1, h2, h3").length;y++){
-                                            document.getElementsByTagName("section")[x].querySelectorAll("p, h1, h2, h3")[y].style.color = flags[colorFlags[j]];
+                                            document.getElementsByTagName("section")[x].querySelectorAll("p, h1, h2, h3")[y].style.color = flags[colorFlags[f]];
                                         }
                                     }
-                                    output.innerText += "Foreground set to "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Foreground set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-tbg":
-                                if(checkClr(flags[colorFlags[j]])){
-                                    document.getElementById("term-window").style.background = flags[colorFlags[j]];
-                                    output.innerText += "Terminal background set to "+flags[colorFlags[j]]+"\n";
+                                if(checkClr(flags[colorFlags[f]])){
+                                    document.getElementById("term-window").style.background = flags[colorFlags[f]];
+                                    output.innerText += "Terminal background set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-tfg":
-                                if(checkClr(flags[colorFlags[j]])){
+                                if(checkClr(flags[colorFlags[f]])){
                                     for(let i = 0; i < document.getElementsByClassName("term").length;i++){
-                                        document.getElementsByClassName("term")[i].style.color = flags[colorFlags[j]];
+                                        document.getElementsByClassName("term")[i].style.color = flags[colorFlags[f]];
                                     }
-                                    output.innerText += "Terminal foreground set to "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Terminal foreground set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-cbg":
-                                if(checkClr(flags[colorFlags[j]])){
-                                    document.getElementById("console-window").style.background = flags[colorFlags[j]];
-                                    output.innerText += "Console background set to "+flags[colorFlags[j]]+"\n";
+                                if(checkClr(flags[colorFlags[f]])){
+                                    document.getElementById("console-window").style.background = flags[colorFlags[f]];
+                                    output.innerText += "Console background set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-cfg":
-                                if(checkClr(flags[colorFlags[j]])){
-                                    document.getElementsByClassName("console")[0].style.color = flags[colorFlags[j]];
-                                    output.innerText += "Console foreground set to "+flags[colorFlags[j]]+"\n";
+                                if(checkClr(flags[colorFlags[f]])){
+                                    document.getElementsByClassName("console")[0].style.color = flags[colorFlags[f]];
+                                    output.innerText += "Console foreground set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-ibg":
-                                if(checkClr(flags[colorFlags[j]])){
-                                    document.getElementsByTagName("textarea")[0].style.background = flags[colorFlags[j]];
-                                    output.innerText += "Terminal background set to "+flags[colorFlags[j]]+"\n";
+                                if(checkClr(flags[colorFlags[f]])){
+                                    document.getElementsByTagName("textarea")[0].style.background = flags[colorFlags[f]];
+                                    output.innerText += "Terminal background set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-ifg":
-                                if(checkClr(flags[colorFlags[j]])){
-                                    document.getElementById("input").style.color = flags[colorFlags[j]];
-                                    output.innerText += "Terminal foreground set to "+flags[colorFlags[j]]+"\n";
+                                if(checkClr(flags[colorFlags[f]])){
+                                    document.getElementById("input").style.color = flags[colorFlags[f]];
+                                    output.innerText += "Terminal foreground set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-obg":
-                                if(checkClr(flags[colorFlags[j]])){
-                                    document.getElementById("output").style.background = flags[colorFlags[j]];
-                                    output.innerText += "Console output background set to "+flags[colorFlags[j]]+"\n";
+                                if(checkClr(flags[colorFlags[f]])){
+                                    document.getElementById("output").style.background = flags[colorFlags[f]];
+                                    output.innerText += "Console output background set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-ofg":
-                                if(checkClr(flags[colorFlags[j]])){
-                                    document.getElementById("output").style.color = flags[colorFlags[j]];
-                                    output.innerText += "Console output foreground set to "+flags[colorFlags[j]]+"\n";
+                                if(checkClr(flags[colorFlags[f]])){
+                                    document.getElementById("output").style.color = flags[colorFlags[f]];
+                                    output.innerText += "Console output foreground set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-bbg":
-                                if(checkClr(flags[colorFlags[j]])){
+                                if(checkClr(flags[colorFlags[f]])){
                                     for(let i=0;i< document.getElementsByTagName("button").length;i++){
-                                        document.getElementsByTagName("button")[i].style.background = flags[colorFlags[j]];
+                                        document.getElementsByTagName("button")[i].style.background = flags[colorFlags[f]];
                                     }
-                                    output.innerText += "Button backgrounds set to "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Button backgrounds set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             case "-bfg":
-                                if(checkClr(flags[colorFlags[j]])){
+                                if(checkClr(flags[colorFlags[f]])){
                                     for(let i=0;i< document.getElementsByTagName("button").length;i++){
-                                        document.getElementsByTagName("button")[i].style.color = flags[colorFlags[j]];
+                                        document.getElementsByTagName("button")[i].style.color = flags[colorFlags[f]];
                                     }
-                                    output.innerText += "Button foregrounds set to "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Button foregrounds set to "+flags[colorFlags[f]]+"\n";
                                 }
                                 else{
-                                    output.innerText += "Invalid flag usage:"+ colorFlags[j] + ": "+flags[colorFlags[j]]+"\n";
+                                    output.innerText += "Invalid flag usage:"+ colorFlags[f] + ": "+flags[colorFlags[f]]+"\n";
                                 }
                                 break;
                             default:
